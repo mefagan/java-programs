@@ -17,6 +17,7 @@ public class StopwatchFactory {
  */
   private static List<Stopwatch> stopWatchList = new ArrayList<Stopwatch>();
   private static Object lock = new Object();
+  
   /**
    * Creates and returns a new Stopwatch object
    * @param id The identifier of the new object
@@ -25,14 +26,14 @@ public class StopwatchFactory {
    *     already taken.
    */
   public static Stopwatch getStopwatch(String id) throws IllegalArgumentException{
-    if(id == null) {
+    if (id == null) {
       throw new IllegalArgumentException("Error: ID is null.");
     }
-    if(id == "") {
+    if (id == "") {
       throw new IllegalArgumentException("Error: ID is empty.");
     } 
-    for(Stopwatch entry: stopWatchList) {
-      if(id.equals(entry.getId())) {
+    for (Stopwatch entry: stopWatchList) {
+      if (id.equals(entry.getId())) {
         throw new IllegalArgumentException("Error: ID already exists.");    	  
       }
     }
@@ -42,6 +43,7 @@ public class StopwatchFactory {
       return watch;
     }
   }
+  
   /**
    * Returns a list of all created stopwatches
    * @return a List of al creates Stopwatch objects.  Returns an empty
