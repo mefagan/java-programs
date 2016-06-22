@@ -1,0 +1,63 @@
+MaryEileen Fagan
+Code Review
+
+Comments for AddressBook.java
+
+lines8-12
+Google style guide mentions that the javadoc should be written with fragments instead of full sentences. There’s a small subject verb agreement issues in the text. Your lines 8-12 could instead be written as, “Stores information of users in form of name, email, and notes. Provides API’s to add, remove, and search for a contact. API’s store and retrieve address book from a file.”
+
+Lines 16 
+Minor, but again I think sentence should be written as a fragment, such as “Adds new contact to address book.” I’m not sure, but I think the @return statement should state whether the boolean true or false is a success.
+
+Line 22
+I’m not positive this applies here, but Effective Java mentions that it’s not necessary to test if an object is null because, when testing for equality, the equals method must cast its argument to an appropriate type. Before doing the case, the method must use the instanceof operator, which would return false if the object were null. So I believe this part can be deleted. If it weren’t, error message would read “Contact cannot be null.”. 
+
+Lines 29-30 
+“Removes contact from address book.”
+
+Line 35
+Again, I don’t think you need to do a null check here.
+
+Lines 38-51
+I think you should try to do this without using break, which I believe is only meant to be used if there’s an error or some reason to unexpectedly leave the loop, not something to rely on. If you use ArrayList.remove(Object), the first occurrence of the specified element if removed from the list. So I think you don’t need to search for the index at all and can remove lines 35-49. You can just have a return false at the end of the method so that it returns false if it hasn’t already returned true.
+
+Lines 72-73
+This is a little hard to understand. Maybe try something like “Returns true if a given string matches any fields of the given contact object.” It would also be helpful to know more about what you mean by “matches”. Does it just look to see if the strings are the same? Is it case sensitive? Does it check substrings? etc
+
+Line 82
+You could use a string builder here, which was recommended before by Jocelyn or Professor Schidlowsky. I think the reasoning is that it’s faster and clearer to read.
+I’m also not sure that it’s necessary to add spaces between all of the fields if you’re just appending for the sake of checking if they contain a string.
+
+Line 88
+“Imports contacts from a .json file.”
+
+
+Line 109
+Again, use fragments.
+
+Comments for Contact.java
+
+Lines 4-9
+I rewrote beginning part of this in fragments and took out the term user, since I don’t think that’s descriptive of what you’re storing.
+“Stores contact information in form of name, email address, phone number, and notes. Uses builder pattern and objects instantiated using build function of static class named Builder…”
+
+Line 20
+This sentence is seems unclear and possibly repetitive. Maybe it can be cut completely.
+“The Builder class is a static class that is meant to serve a typical builder class in a Builder pattern.”
+
+Line 37
+I don’t think you need to check for null here since you’re setting the values to defaults.
+
+Line 53
+So would this catch an exception if hyphens are included. I think it would have to be more inclusive than limiting to integers. It also seems like this would cause an error if the user doesn’t enter a number at all, since the default value is simply “”. I think you’d have to make this a required field if you want integers to be entered.
+
+Line 70, 83
+Again, I don’t think you need to check if the note and e-mail address are null.
+
+Lines 141 and 155
+I don’t think you need javadocs on override functions.
+
+Lines 160-172
+Effective Java has a really helpful guide on pp. 42-43 with tips for making the equals function. It suggests using the instanceof operator to check if the argument has the correct type. I think this also eliminates the need to check if fields are null. I also think you need something to make sure the equals check in the return statement is not case sensitive. 
+
+Effective Java mentions that you should always override toString() because it makes the class more pleasant to use. I think you’re missing that function.
