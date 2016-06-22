@@ -19,7 +19,7 @@ Line 35
 Again, I don’t think you need to do a null check here.
 
 Lines 38-51
-I think you should try to do this without using break, which I believe is only meant to be used if there’s an error or some reason to unexpectedly leave the loop, not something to rely on. If you use ArrayList.remove(Object), the first occurrence of the specified element if removed from the list. So I think you don’t need to search for the index at all and can remove lines 35-49. You can just have a return false at the end of the method so that it returns false if it hasn’t already returned true.
+I think you should try to do this without using break, which I believe is only meant to be used if there’s an error or some reason to unexpectedly leave the loop, not something to rely on. If you use ArrayList.remove(Object), the first occurrence of the specified element if removed from the list. So I think you don’t need to search for the index at all and can remove lines 35-49. You can just have a return false at the end of the method so that it returns false if it hasn’t already returned true. 
 
 Lines 72-73
 This is a little hard to understand. Maybe try something like “Returns true if a given string matches any fields of the given contact object.” It would also be helpful to know more about what you mean by “matches”. Does it just look to see if the strings are the same? Is it case sensitive? Does it check substrings? etc
