@@ -12,12 +12,11 @@ import org.junit.Test;
 
 public class ContactTest {
 	
-	/*@Test
+	@Test
 	public final void testMatch() {
-		MatchableString("Hello5HELLO");
-		assertTrue(match("Hello5HELLO"));
-		assertFalse(match("helloHeLlO"));
-	}*/
+		Contact contact = new Contact.Builder().withName("MaryEileen Fagan").build();
+		assertTrue(contact.getName().match("aRYEILeEN"));
+	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public final void testFieldCount() {
@@ -108,7 +107,6 @@ public class ContactTest {
 		String expected = "marcel@gmail.com";
 		assertEquals(expected, contact.toString());
 	}
-	
 
 	@Test
 	public final void testObject() {
