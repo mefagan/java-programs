@@ -1,16 +1,24 @@
 package addressbook;
 
 import static org.junit.Assert.*;
+
+import org.junit.Before;
+import java.io.*;
+
 import addressbook.Contact;
 import addressbook.AddressBook;
 
 import org.junit.Test;
 
 public class AddressBookTest {
-
+	
+	private AddressBook addressbook;
+	private Contact contact;
+	
 	@Test
 	public final void testAddressBook() {
-		AddressBook addressbook = new AddressBook();
+		addressbook = new AddressBook();
+		assertEquals(0, addressbook.size());
 	}
 
 	@Test
@@ -20,7 +28,9 @@ public class AddressBookTest {
 
 	@Test
 	public final void testAddContact() {
-		fail("Not yet implemented");
+		contact = new Contact.Builder().withName("MaryEileen Fagan").build();
+		addressbook.addContact(contact);
+		//assertEquals(0, addressbook.size());
 	}
 
 	@Test
@@ -40,7 +50,17 @@ public class AddressBookTest {
 
 	@Test
 	public final void testToString() {
-		fail("Not yet implemented");
+		Contact contact1 = new Contact.Builder().withNote("person from the park").build();
+		Contact contact2 = new Contact.Builder().withPhoneNumber("215").withAddress("Sesame Street").build();
+		Contact contact3 = new Contact.Builder().withName("Miguel").build();
+		Contact contact4 = new Contact.Builder().withName("Melanie").build();
+		addressbook.addContact(contact1);
+		addressbook.addContact(contact4);
+		addressbook.addContact(contact3);
+		addressbook.addContact(contact2);
+		String expected =  "person from park" + "\n" + "Melanie" +"\n" + "Michel"
+			    + "\n" + "215" + "\n" + "Sesame Street" +  "\n";
+		assertEquals(expected, addressbook.toString());
 	}
 
 	@Test
@@ -70,7 +90,8 @@ public class AddressBookTest {
 
 	@Test
 	public final void testToString1() {
-		fail("Not yet implemented");
+		
+
 	}
 
 	@Test
