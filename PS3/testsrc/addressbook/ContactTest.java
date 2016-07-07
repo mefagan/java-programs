@@ -2,6 +2,8 @@ package addressbook;
 
 import static org.junit.Assert.*;
 import addressbook.Contact;
+import addressbook.AddressBook;
+import addressbook.AddressBook.ContactAttribute;
 import addressbook.Contact.Builder;
 
 import org.junit.Before;
@@ -9,10 +11,13 @@ import org.junit.Test;
 
 public class ContactTest {
 	
-	@Test
+	/*@Test
 	public final void testMatch() {
-		fail("Not yet implemented");
-	}
+		Contact contact = new Contact.Builder().withName("MaryEileen Fagan").build();
+		match(ContactAttribute.NAME, "MaryEileen Fagan");
+		assertTrue(matchFound);
+		
+	}*/
 	
 	@Test(expected=IllegalArgumentException.class)
 	public final void testFieldCount() {
@@ -82,7 +87,14 @@ public class ContactTest {
 
 	@Test
 	public final void testToString() {
-		fail("Not yet implemented");
+		Contact contact = new Contact.Builder().withName("Kelly").withEmail("sss@gmail.com").
+				withPhoneNumber("62364").
+				withAddress("Bobst Library").
+				withNote("classmate").build();
+		String expected = "Kelly" + "\n" + "sss@gmail.com" + "\n" + 
+				"62364" + "\n" + "Bobst Library" + "\n"  + "classmate" + "\n";
+		assertEquals(expected, contact.toString());
+	
 	}
 
 	@Test
