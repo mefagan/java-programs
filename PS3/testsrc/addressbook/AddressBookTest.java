@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import java.io.*;
+import java.util.ArrayList;
 
 import addressbook.Contact;
 import addressbook.AddressBook;
@@ -15,10 +16,14 @@ public class AddressBookTest {
 	private AddressBook addressbook;
 	private Contact contact;
 	
+	@Before
+	public void setUp(){
+		addressbook = new AddressBook();
+	}
+	
 	@Test
 	public final void testAddressBook() {
-		addressbook = new AddressBook();
-		assertEquals(0, addressbook.size());
+		assertEquals(0, addressbook.getContactList().size());
 	}
 
 	@Test
