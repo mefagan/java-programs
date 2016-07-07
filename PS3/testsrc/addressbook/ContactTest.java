@@ -1,12 +1,14 @@
 package addressbook;
 
 import static org.junit.Assert.*;
+import addressbook.Contact;
+import addressbook.Contact.Builder;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class ContactTest {
-	testable contact = new Contact
-
+	
 	@Test
 	public final void testMatch() {
 		fail("Not yet implemented");
@@ -14,27 +16,37 @@ public class ContactTest {
 
 	@Test
 	public final void testGetName() {
-		fail("Not yet implemented");
+		Contact contact = new Contact.Builder().withName("MaryEileen Fagan").build();
+		assertEquals("MaryEileen Fagan", contact.getName());
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public final void testGetName_twoNames() {
+		Contact contact = new Contact.Builder().withName("MaryEileen Fagan").withName("Zadie Smith").build();
 	}
 
 	@Test
 	public final void testGetEmailAddress() {
-		fail("Not yet implemented");
+		Contact contact = new Contact.Builder().withEmail("mf3323@nyu.edu").build();
+		assertEquals("mf3323@nyu.edu", contact.getEmailAddress());
 	}
 
 	@Test
 	public final void testGetPhoneNumber() {
-		fail("Not yet implemented");
+		Contact contact = new Contact.Builder().withPhoneNumber("21599999999").build();
+		assertEquals("21599999999", contact.getPhoneNumber());
 	}
 
 	@Test
 	public final void testGetAddress() {
-		fail("Not yet implemented");
+		Contact contact = new Contact.Builder().withAddress("9999 wellington way").build();
+		assertEquals("9999 wellington way", contact.getAddress());
 	}
 
 	@Test
 	public final void testGetNote() {
-		fail("Not yet implemented");
+		Contact contact = new Contact.Builder().withNote("person I hate").build();
+		assertEquals("person I hate", contact.getAddress());
 	}
 
 	@Test
