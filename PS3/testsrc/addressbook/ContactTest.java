@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class ContactTest {
+	testable contact = new Contact
 
 	@Test
 	public final void testMatch() {
