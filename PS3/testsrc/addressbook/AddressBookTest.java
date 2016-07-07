@@ -35,7 +35,7 @@ public class AddressBookTest {
 	public final void testAddContact() {
 		contact = new Contact.Builder().withName("MaryEileen Fagan").build();
 		addressbook.addContact(contact);
-		//assertEquals(0, addressbook.size());
+		assertEquals(1, addressbook.getContactList().size());
 	}
 
 	@Test
