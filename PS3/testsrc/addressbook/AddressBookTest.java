@@ -1,13 +1,13 @@
 package addressbook;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 
 import org.junit.Before;
-import java.io.*;
-import java.util.ArrayList;
-
 import addressbook.Contact;
 import addressbook.AddressBook;
+import addressbook.AddressBook.ContactAttribute;
 
 import org.junit.Test;
 
@@ -16,9 +16,15 @@ public class AddressBookTest {
 	private AddressBook addressbook;
 	private Contact contact;
 	
+	
 	@Before
 	public void setUp(){
 		addressbook = new AddressBook();
+	}
+	
+	@Test
+	public void testContactAttributes(){
+		assertThat(ContactAttribute.valueOf("Name"), is(notNullValue()));
 	}
 	
 	@Test

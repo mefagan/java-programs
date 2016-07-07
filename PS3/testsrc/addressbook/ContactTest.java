@@ -2,12 +2,8 @@ package addressbook;
 
 import static org.junit.Assert.*;
 import addressbook.Contact;
-import addressbook.AddressBook;
-import addressbook.MatchableString;
-import addressbook.AddressBook.ContactAttribute;
 import addressbook.Contact.Builder;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class ContactTest {
