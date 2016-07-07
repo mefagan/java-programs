@@ -3,6 +3,7 @@ package addressbook;
 import static org.junit.Assert.*;
 import addressbook.Contact;
 import addressbook.AddressBook;
+import addressbook.MatchableString;
 import addressbook.AddressBook.ContactAttribute;
 import addressbook.Contact.Builder;
 
@@ -13,10 +14,9 @@ public class ContactTest {
 	
 	/*@Test
 	public final void testMatch() {
-		Contact contact = new Contact.Builder().withName("MaryEileen Fagan").build();
-		match(ContactAttribute.NAME, "MaryEileen Fagan");
-		assertTrue(matchFound);
-		
+		MatchableString("Hello5HELLO");
+		assertTrue(match("Hello5HELLO"));
+		assertFalse(match("helloHeLlO"));
 	}*/
 	
 	@Test(expected=IllegalArgumentException.class)
@@ -76,7 +76,7 @@ public class ContactTest {
 	@Test
 	public final void testGetNote() {
 		Contact contact = new Contact.Builder().withNote("person I hate").build();
-		assertEquals("person I hate", contact.getAddress());
+		assertEquals("person I hate", contact.getNote());
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
@@ -94,8 +94,21 @@ public class ContactTest {
 		String expected = "Kelly" + "\n" + "sss@gmail.com" + "\n" + 
 				"62364" + "\n" + "Bobst Library" + "\n"  + "classmate" + "\n";
 		assertEquals(expected, contact.toString());
-	
 	}
+	
+	@Test
+	public final void testToStringNullsWithName() {
+		Contact contact = new Contact.Builder().withName("Rachel").build();
+		String expected = "Rachel";
+		assertEquals(expected, contact.toString());
+	}
+	@Test
+	public final void testToStringNullsWithoutName() {
+		Contact contact = new Contact.Builder().withEmail("marcel@gmail.com").build();
+		String expected = "marcel@gmail.com";
+		assertEquals(expected, contact.toString());
+	}
+	
 
 	@Test
 	public final void testObject() {

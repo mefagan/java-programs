@@ -1,6 +1,8 @@
 package addressbook;
 
 import static org.junit.Assert.*;
+import addressbook.Contact;
+import addressbook.AddressBook;
 
 import org.junit.Test;
 
@@ -8,7 +10,7 @@ public class AddressBookTest {
 
 	@Test
 	public final void testAddressBook() {
-		fail("Not yet implemented");
+		AddressBook addressbook = new AddressBook();
 	}
 
 	@Test
