@@ -13,6 +13,12 @@ public class ContactTest {
 	public final void testMatch() {
 		fail("Not yet implemented");
 	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public final void testFieldCount() {
+		Builder contact = new Contact.Builder();
+		contact.build();
+	}
 
 	@Test
 	public final void testGetName() {
