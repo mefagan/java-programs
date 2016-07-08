@@ -47,10 +47,6 @@ public class AddressBook {
     contactDirectory = new ArrayList<Contact>();
   }
   
-  public ArrayList<Contact> getContactList(){
-	  return contactDirectory;
-  }
-  
   /**
    * Constructor used to load a previously stored file. User must handle
    * FileNotFoundExceptions and IOExceptions. The filepath must be either

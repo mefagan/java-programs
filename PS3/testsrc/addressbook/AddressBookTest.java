@@ -1,9 +1,15 @@
 package addressbook;
 
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
 import org.junit.Before;
 import addressbook.Contact;
 import addressbook.AddressBook;
+import java.util.Collections;
 import org.junit.Test;
 
 public class AddressBookTest {
@@ -12,14 +18,35 @@ public class AddressBookTest {
 	private Contact contact;
 	
 	
+	
 	@Before
 	public void setUp(){
 		addressbook = new AddressBook();
 	}
 	
+	public final List<Contact> getContactList(AddressBook addressbook){
+		List<Contact> contactList = Collections.synchronizedList(new ArrayList<Contact>());
+		contactList.addAll(addressbook.search(AddressBook.ContactAttribute.EMAIL, ""));
+		contactList.addAll(addressbook.search(AddressBook.ContactAttribute.NAME, "")); 
+		contactList.addAll(addressbook.search(AddressBook.ContactAttribute.PHONE, "")); 
+		contactList.addAll(addressbook.search(AddressBook.ContactAttribute.ADDRESS, "")); 
+		contactList.addAll(addressbook.search(AddressBook.ContactAttribute.NOTE, "")); 
+		HashSet<Contact> contactSet = new HashSet<Contact>(contactList);
+		contactList.clear();
+		contactList.addAll(contactSet);
+		return contactList;
+	}
+	
+	@Test
+	public final void testGetContactList(){
+		contact = new Contact.Builder().withName("MaryEileen Fagan").build();
+		addressbook.addContact(contact);
+		assertEquals(1, getContactList(addressbook).size());
+	}
+	
 	@Test
 	public final void testAddressBook() {
-		assertEquals(0, addressbook.getContactList().size());
+		assertEquals(0, getContactList(addressbook).size());
 	}
 
 	@Test
@@ -31,7 +58,7 @@ public class AddressBookTest {
 	public final void testAddContact() {
 		contact = new Contact.Builder().withName("MaryEileen Fagan").build();
 		addressbook.addContact(contact);
-		assertEquals(1, addressbook.getContactList().size());
+		assertEquals(1, getContactList(addressbook).size());
 	}
 
 	@Test
@@ -39,19 +66,20 @@ public class AddressBookTest {
 		contact = new Contact.Builder().withName("MaryEileen Fagan").build();
 		addressbook.addContact(contact);
 		addressbook.removeContact(contact);
-		assertEquals(0, addressbook.getContactList().size());
+		assertEquals(0, getContactList(addressbook).size());
 	}
 
 	@Test
-	public final void testSearchOneEntry() {
+	public final void testSearch_Entry() {
 		contact = new Contact.Builder().withName("MaryEileen Fagan").withAddress("Rittenhouse Square").build();
 		addressbook.addContact(contact);
-		//assertTrue(1, search(AddressBook.ContactAttribute.NAME, "MaryEileen").size());
+		addressbook.search(AddressBook.ContactAttribute.EMAIL, "nyu.edu");
+		assertEquals(1, addressbook.search(AddressBook.ContactAttribute.NAME, "MaryEileen").size());
 	}
 
 	@Test
 	public final void testSave() {
-		fail("Not yet implemented");
+		
 	}
 
 	@Test
@@ -69,65 +97,6 @@ public class AddressBookTest {
 		assertEquals(expected, addressbook.toString());
 	}
 
-	/*@Test
-	public final void testObject() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public final void testGetClass() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public final void testHashCode() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public final void testEquals() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public final void testClone() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public final void testToString1() {
-		
-
-	}
-
-	@Test
-	public final void testNotify() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public final void testNotifyAll() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public final void testWaitLong() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public final void testWaitLongInt() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public final void testWait() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public final void testFinalize() {
-		fail("Not yet implemented");
-	}*/
+	
 
 }
