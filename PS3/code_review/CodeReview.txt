@@ -9,3 +9,58 @@ Again, would be helpful to have a javadoc description here.
 
 Line 89
 I think the reset is supposed to actually stop the stopwatch if it’s already running and your program does clear the lap times as well as change the running state to false, but it doesn’t add the past times or add the lap times, like the stop function does. Maybe this is your intention, but it’s a bit confusing to say that the stopwatch stops if it’s already running. There’s also no condition to check if the stopwatch is already running.
+
+Line 105
+Warnings shouldn’t be suppressed.
+
+Line 106
+Should describe what happens with the lap times when the function is called while the stopwatch is still running. It seems to just add however long the stopwatch has been started and count it as a lap, but I think it should only be a lap if the stopwatch is stopped. It also doesn’t seem to give any of the possible previous lap times. I think if it’s called while the stopwatch is running, it should just gives the list of recorded lap times up until this point.
+
+118
+Effective Java recommends using string builder.
+Also lap times is an array list here so you might want some way to differentiate between the different times.
+
+114
+Unnecessary to have a cloned copy of the lapTimes list. 
+
+Line 122
+Having an overridden equals method is unnecessary code. There’s not a reason to compare two stopwatches and it will likely just cause more confusion.
+
+StopWatchFactory
+
+Lines 16-17
+I think this should be in the javadoc instead of a comment.
+
+.
+Contact:55: Integer.parseInt will throw a NumberFormatException for most valid phone numbers (overflow). Should confirm that the string contains only digits in another way.
+Strings should be compared with .equals, not ==.
+Missing toString for AddressBook.
+Contact#equals incorrectly implemented. If the argument is not of type Contact, the first line will throw a ClassCastException. The type should be checked before casting. 
+Contact:166: Use instanceof instead of getClass().
+Inconsistent naming in Builder methods.
+AddressBook:14: should use interfaces for declaration, not concrete classes.
+Return types should also be interfaces instead of implementations.
+Shouldn’t catch an exception just to throw it again.
+If you do throw an exception, it should have a descriptive error message.
+AddressBook:104, 124: throwing the exception would be more appropriate here than returning false.
+AddressBook:124: Should catch a more specific Exception.
+AddressBook#match logic would make more sense in Contact.
+AddressBook#search can return false positives since all fields are concatenated and then that string is used for the search.
+AddressBook:116: Do not call toString on a string.
+Package name could be better.
+Javadoc should begin with 2 “*”s, not 3. 
+Missing @throws in many methods.
+Don’t use “this” to access members of the class you are in when there isn’t another variable with the same name in a closer scope. (e.g. Contact:41)
+Style issues
+Tabs used.
+Lines over 100 characters.
+A single whitespace should be used before open braces, and to separate “if,” “for,” “while,” and “catch” when an open parenthesis follows them on the same line.(4.6.2)
+Braces should always be used, even for empty or single-line statements. (4.1.1)
+There should not be a space between a method name and its opening parenthesis (e.g. Contact:52).
+There should be no line break after the closing brace of an if-statement if it is followed by an else, or after a try-statement if it is followed by a catch.
+There should be a space after the closing parenthesis of a cast (e.g. Contact:161).
+Line continuations should be 4-space indents.
+Unnecessary comments left in code.
+Should not use wildcard imports.
+Incorrect import ordering.
+Each group of imports should be separated by a blank line.
