@@ -1,5 +1,11 @@
-Please enter your code review in this file as plain text
-and make sure to include it when you commit your project.
-
-HI, MaryEileen Fagan
+MaryEileen Fagan
 Code Review
+
+StopWatchCreator
+line 43
+It would be helpful for the javadoc to explain what the start function does apart from throwing an illegal argument exception in the case of an already running stopwatch.
+line 79
+Again, would be helpful to have a javadoc description here.
+
+Line 89
+I think the reset is supposed to actually stop the stopwatch if it’s already running and your program does clear the lap times as well as change the running state to false, but it doesn’t add the past times or add the lap times, like the stop function does. Maybe this is your intention, but it’s a bit confusing to say that the stopwatch stops if it’s already running. There’s also no condition to check if the stopwatch is already running.

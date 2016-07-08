@@ -3,18 +3,14 @@ package addressbook;
 import static org.junit.Assert.*;
 import addressbook.Contact;
 import addressbook.Contact.Builder;
+import addressbook.MatchableString;
+import addressbook.PhoneNumber;
 
 import org.junit.Test;
 
 public class ContactTest {
 	
 	private Contact contact;
-	
-	@Test
-	public final void testMatch() {
-		contact = new Contact.Builder().withName("MaryEileen Fagan").build();
-		assertTrue(contact.getName().matches("aRYEILeEN"));
-	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public final void testFieldCount() {
@@ -105,8 +101,12 @@ public class ContactTest {
 		String expected = "marcel@gmail.com";
 		assertEquals(expected, contact.toString());
 	}
+	
+	public class MatchableStringTest{
+		
+	}
 
-	@Test
+	/*@Test
 	public final void testObject() {
 		fail("Not yet implemented");
 	}
@@ -164,6 +164,6 @@ public class ContactTest {
 	@Test
 	public final void testFinalize() {
 		fail("Not yet implemented");
-	}
+	}*/
 
 }

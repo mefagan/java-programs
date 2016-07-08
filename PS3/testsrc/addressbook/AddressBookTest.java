@@ -1,14 +1,9 @@
 package addressbook;
 
 import static org.junit.Assert.*;
-import static org.hamcrest.MatcherAssert.assertThat;
-
-
 import org.junit.Before;
 import addressbook.Contact;
 import addressbook.AddressBook;
-import addressbook.AddressBook.ContactAttribute;
-
 import org.junit.Test;
 
 public class AddressBookTest {
@@ -20,11 +15,6 @@ public class AddressBookTest {
 	@Before
 	public void setUp(){
 		addressbook = new AddressBook();
-	}
-	
-	@Test
-	public void testContactAttributes(){
-		assertThat(ContactAttribute.valueOf("Name"), is(notNullValue()));
 	}
 	
 	@Test
@@ -46,12 +36,17 @@ public class AddressBookTest {
 
 	@Test
 	public final void testRemoveContact() {
-		fail("Not yet implemented");
+		contact = new Contact.Builder().withName("MaryEileen Fagan").build();
+		addressbook.addContact(contact);
+		addressbook.removeContact(contact);
+		assertEquals(0, addressbook.getContactList().size());
 	}
 
 	@Test
-	public final void testSearch() {
-		fail("Not yet implemented");
+	public final void testSearchOneEntry() {
+		contact = new Contact.Builder().withName("MaryEileen Fagan").withAddress("Rittenhouse Square").build();
+		addressbook.addContact(contact);
+		//assertTrue(1, search(AddressBook.ContactAttribute.NAME, "MaryEileen").size());
 	}
 
 	@Test
@@ -74,7 +69,7 @@ public class AddressBookTest {
 		assertEquals(expected, addressbook.toString());
 	}
 
-	@Test
+	/*@Test
 	public final void testObject() {
 		fail("Not yet implemented");
 	}
@@ -133,6 +128,6 @@ public class AddressBookTest {
 	@Test
 	public final void testFinalize() {
 		fail("Not yet implemented");
-	}
+	}*/
 
 }
