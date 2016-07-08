@@ -2,6 +2,8 @@ package addressbook;
 
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -20,7 +22,21 @@ public class AddressBookTest {
 	public void setUp(){
 		addressbook = new AddressBook();
 	}
+	/*
+	@Test
+	public final testAddressBook(){
+		
+	}
 	
+	@Test
+	public final testAddressBook(expected = IOException.class){
+		
+	}
+	@Test
+	public final testAddressBook(expected = FileNotFoundException.class){
+		
+	}
+	*/
 	public final List<Contact> getContactList(AddressBook addressbook){
 		List<Contact> contactList = Collections.synchronizedList(new ArrayList<Contact>());
 		contactList.addAll(addressbook.search(AddressBook.ContactAttribute.EMAIL, ""));
@@ -32,6 +48,11 @@ public class AddressBookTest {
 		contactList.clear();
 		contactList.addAll(contactSet);
 		return contactList;
+	}
+	
+	@Test
+	public final void testGetContactList_zeroContacts(){
+		assertEquals(0, getContactList(addressbook).size());
 	}
 	
 	@Test
@@ -55,8 +76,7 @@ public class AddressBookTest {
 		addressbook.addContact(contact5);
 		assertEquals(5, getContactList(addressbook).size());
 	}
-	
-	
+		
 	@Test
 	public final void testAddressBook() {
 		assertEquals(0, getContactList(addressbook).size());
@@ -91,9 +111,24 @@ public class AddressBookTest {
 	}
 
 	@Test
-	public final void testSave() {
+	public final void testSave() throws FileNotFoundException, IOException {
+		Contact contact = new Contact.Builder().withEmail("kw@yahoo.com").withPhoneNumber("55534-4").
+				withName("Kanye West").withNote("rapper").build();
+		addressbook.addContact(contact);
+		addressbook.save("addressBookFile");
+		AddressBook addressbook2 = new AddressBook();
+		AddressBook("ddressBookFile");
+	}
+
+	/*@Test
+	public final void testSave(expected = IOException.class) {
 		
 	}
+
+	@Test
+	public final void testSave(expected = FileNotFoundException.class) {
+		
+	}*/
 
 	@Test
 	public final void testToString() {
