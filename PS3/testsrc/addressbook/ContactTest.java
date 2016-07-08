@@ -21,7 +21,7 @@ public class ContactTest {
     contact = new Contact.Builder().withName("MaryEileen Fagan").build();
     assertEquals("MaryEileen Fagan", contact.getName());
   }
-	
+
   @Test(expected=IllegalArgumentException.class)
   public final void testGetName_twoNames() {
     Builder contactBuilder = new Contact.Builder().withName("MaryEileen Fagan");
@@ -33,7 +33,7 @@ public class ContactTest {
     contact = new Contact.Builder().withEmail("mf3323@nyu.edu").build();
     assertEquals("mf3323@nyu.edu", contact.getEmailAddress());
   }
-	
+
   @Test(expected=IllegalArgumentException.class)
   public final void testGetEmailAddress_twoEmails(){
     Builder contact = new Contact.Builder().withEmail("mf3323@nyu.edu");
@@ -45,7 +45,7 @@ public class ContactTest {
     contact = new Contact.Builder().withPhoneNumber("21599999999").build();
     assertEquals("21599999999", contact.getPhoneNumber());
   }
-	
+
   @Test(expected=IllegalArgumentException.class)
   public final void testGetPhoneNumber_twoNumbers(){
     Builder contactBuilder = new Contact.Builder().withPhoneNumber("2222345332");
@@ -57,7 +57,7 @@ public class ContactTest {
     contact = new Contact.Builder().withAddress("9999 wellington way").build();
     assertEquals("9999 wellington way", contact.getAddress());
   }
-	
+
   @Test(expected=IllegalArgumentException.class)
   public final void testGetAddress_twoAddresses(){
     Builder contactBuilder = new Contact.Builder().withAddress("osage avenue");
@@ -69,7 +69,7 @@ public class ContactTest {
     contact = new Contact.Builder().withNote("person I hate").build();
     assertEquals("person I hate", contact.getNote());
   }
-	
+
   @Test(expected=IllegalArgumentException.class)
   public final void testGetNote_twoNotes(){
     Builder contactBuilder = new Contact.Builder().withNote("person I hate");
@@ -86,21 +86,21 @@ public class ContactTest {
 	    "62364" + "\n" + "Bobst Library" + "\n"  + "classmate" + "\n";
     assertEquals(expected, contact.toString());
   }
-	
+
   @Test
   public final void testToStringNullsWithName() {
     contact = new Contact.Builder().withName("Rachel").build();
     String expected = "Rachel" + "\n";
     assertEquals(expected, contact.toString());
   }
-	
+
   @Test
   public final void testToStringNullsWithoutName() {
     contact = new Contact.Builder().withEmail("marcel@gmail.com").build();
     String expected = "marcel@gmail.com" + "\n";
     assertEquals(expected, contact.toString());
   }
-	
+
   @Test
   public final void testMatch_multipleFields(){
     contact = new Contact.Builder().withName("Ryan").withEmail("marcel@gmail.com").
@@ -111,66 +111,66 @@ public class ContactTest {
     assertTrue(contact.match(AddressBook.ContactAttribute.ADDRESS, "9"));
     assertTrue(contact.match(AddressBook.ContactAttribute.NOTE, "bro"));
   }
-	
+
   @Test
   public final void testMatch_Email(){
     contact = new Contact.Builder().withEmail("marcel@gmail.com").build();
     assertTrue(contact.match(AddressBook.ContactAttribute.EMAIL, ".com"));
     assertFalse(contact.match(AddressBook.ContactAttribute.EMAIL, "nyu"));
   }
-	
+
   @Test
   public final void testMatch_nullEmail(){
     contact = new Contact.Builder().withName("Roy").build();
     assertFalse(contact.match(AddressBook.ContactAttribute.EMAIL, "nyu"));
   }
-	
+
   @Test
   public final void testMatch_Name(){
     contact = new Contact.Builder().withName("Roy").build();
     assertTrue(contact.match(AddressBook.ContactAttribute.NAME, "RO"));
     assertFalse(contact.match(AddressBook.ContactAttribute.NAME, "YRO"));
   }
-	
+
   @Test
   public final void testMatch_nullName(){
     contact = new Contact.Builder().withEmail(".edu").build();
     assertFalse(contact.match(AddressBook.ContactAttribute.EMAIL, "YRO"));
   }
-	
+
   @Test
   public final void testMatch_Phone(){
     contact = new Contact.Builder().withPhoneNumber("215620-984-8543").build();
     assertTrue(contact.match(AddressBook.ContactAttribute.PHONE, "98485"));
     assertFalse(contact.match(AddressBook.ContactAttribute.PHONE, "435"));
   }
-	
+
   @Test
   public final void testMatch_nullPhone(){
     contact = new Contact.Builder().withEmail(".edu").build();
     assertFalse(contact.match(AddressBook.ContactAttribute.PHONE, "YRO"));
   }
-	
+
   @Test
   public final void testMatch_Address(){
     contact = new Contact.Builder().withAddress("4th Street Washington").build();
     assertTrue(contact.match(AddressBook.ContactAttribute.ADDRESS, "wash"));
     assertFalse(contact.match(AddressBook.ContactAttribute.ADDRESS, "5th"));
   }
-	
+
   @Test
   public final void testMatch_nullAddress(){
     contact = new Contact.Builder().withEmail(".edu").build();
     assertFalse(contact.match(AddressBook.ContactAttribute.ADDRESS, "YRO"));
   }
-	
+
   @Test
   public final void testMatch_Note(){
     contact = new Contact.Builder().withNote("co-worker").build();
     assertTrue(contact.match(AddressBook.ContactAttribute.NOTE, "work"));
     assertFalse(contact.match(AddressBook.ContactAttribute.NOTE, "5th"));
   }
-	
+
   @Test
   public final void testMatch_nullNote(){
     contact = new Contact.Builder().withEmail(".edu").build();
