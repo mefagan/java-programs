@@ -15,10 +15,7 @@ import org.junit.Test;
 public class AddressBookTest {
 	
 	private AddressBook addressbook;
-	private Contact contact;
-	
-	
-	
+
 	@Before
 	public void setUp(){
 		addressbook = new AddressBook();
@@ -38,11 +35,27 @@ public class AddressBookTest {
 	}
 	
 	@Test
-	public final void testGetContactList(){
-		contact = new Contact.Builder().withName("MaryEileen Fagan").build();
+	public final void testGetContactList_oneContact(){
+		Contact contact = new Contact.Builder().withName("MaryEileen Fagan").build();
 		addressbook.addContact(contact);
 		assertEquals(1, getContactList(addressbook).size());
 	}
+	
+	@Test
+	public final void testGetContactList_multipleContacts(){
+		Contact contact1 = new Contact.Builder().withName("MaryEileen Fagan").build();
+		Contact contact2 = new Contact.Builder().withName("Kelly").withEmail("12345").withNote("hello").build();
+		Contact contact3 = new Contact.Builder().withNote("Kelly").withPhoneNumber("12345").withEmail("hello").build();
+		Contact contact4 = new Contact.Builder().withName("Kelly").withEmail("12345").build();
+		Contact contact5 = new Contact.Builder().withAddress("Hopper Way").withEmail("12345").withNote("hello").build();
+		addressbook.addContact(contact1);
+		addressbook.addContact(contact2);
+		addressbook.addContact(contact3);
+		addressbook.addContact(contact4);
+		addressbook.addContact(contact5);
+		assertEquals(5, getContactList(addressbook).size());
+	}
+	
 	
 	@Test
 	public final void testAddressBook() {
@@ -56,14 +69,14 @@ public class AddressBookTest {
 
 	@Test
 	public final void testAddContact() {
-		contact = new Contact.Builder().withName("MaryEileen Fagan").build();
+		Contact contact = new Contact.Builder().withName("MaryEileen Fagan").build();
 		addressbook.addContact(contact);
 		assertEquals(1, getContactList(addressbook).size());
 	}
 
 	@Test
 	public final void testRemoveContact() {
-		contact = new Contact.Builder().withName("MaryEileen Fagan").build();
+		Contact contact = new Contact.Builder().withName("MaryEileen Fagan").build();
 		addressbook.addContact(contact);
 		addressbook.removeContact(contact);
 		assertEquals(0, getContactList(addressbook).size());
@@ -71,7 +84,7 @@ public class AddressBookTest {
 
 	@Test
 	public final void testSearch_Entry() {
-		contact = new Contact.Builder().withName("MaryEileen Fagan").withAddress("Rittenhouse Square").build();
+		Contact contact = new Contact.Builder().withName("MaryEileen Fagan").withAddress("Rittenhouse Square").build();
 		addressbook.addContact(contact);
 		addressbook.search(AddressBook.ContactAttribute.EMAIL, "nyu.edu");
 		assertEquals(1, addressbook.search(AddressBook.ContactAttribute.NAME, "MaryEileen").size());
