@@ -92,20 +92,32 @@ public class ContactTest {
 	@Test
 	public final void testToStringNullsWithName() {
 		contact = new Contact.Builder().withName("Rachel").build();
-		String expected = "Rachel";
+		String expected = "Rachel" + "\n";
 		assertEquals(expected, contact.toString());
 	}
+	
 	@Test
 	public final void testToStringNullsWithoutName() {
 		contact = new Contact.Builder().withEmail("marcel@gmail.com").build();
-		String expected = "marcel@gmail.com";
+		String expected = "marcel@gmail.com" + "\n";
 		assertEquals(expected, contact.toString());
+	}
+	
+	@Test
+	public final void testMatch_multipleFields(){
+		contact = new Contact.Builder().withName("Ryan").withEmail("marcel@gmail.com").
+				withAddress("99").withNote("brother").withPhoneNumber("9999").build();
+		assertTrue(contact.match(AddressBook.ContactAttribute.NAME, "ya"));
+		assertTrue(contact.match(AddressBook.ContactAttribute.EMAIL, "gm"));
+		assertTrue(contact.match(AddressBook.ContactAttribute.PHONE, "9"));
+		assertTrue(contact.match(AddressBook.ContactAttribute.ADDRESS, "9"));
+		assertTrue(contact.match(AddressBook.ContactAttribute.NOTE, "bro"));
 	}
 	
 	@Test
 	public final void testMatch_Email(){
 		contact = new Contact.Builder().withEmail("marcel@gmail.com").build();
-		assertTrue(contact.match(AddressBook.ContactAttribute.EMAIL, ".edu"));
+		assertTrue(contact.match(AddressBook.ContactAttribute.EMAIL, ".com"));
 		assertFalse(contact.match(AddressBook.ContactAttribute.EMAIL, "nyu"));
 	}
 	
