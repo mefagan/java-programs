@@ -49,20 +49,24 @@ public class AddressBookTest {
   }
 
   @Test
-  public final void testGetContactList_multipleContacts(){
-    Contact contact1 = new Contact.Builder().withName("MaryEileen Fagan").build();
+  public final void testGetContactList_multipleContactsSize(){
+    Contact contact1 = new Contact.Builder().withNote("my best friend").build();
     Contact contact2 = new Contact.Builder().withName("Kelly").withEmail("12345").withNote("hello").build();
     Contact contact3 = new Contact.Builder().withNote("Kelly").withPhoneNumber("12345").withEmail("hello").build();
     Contact contact4 = new Contact.Builder().withName("Kelly").withEmail("12345").build();
     Contact contact5 = new Contact.Builder().withAddress("Hopper Way").withEmail("12345").withNote("hello").build();
     addressbook.addContact(contact1);
+    assertEquals(1, getContactList(addressbook).size());
     addressbook.addContact(contact2);
+    assertEquals(2, getContactList(addressbook).size());
     addressbook.addContact(contact3);
+    assertEquals(3, getContactList(addressbook).size());
     addressbook.addContact(contact4);
+    assertEquals(4, getContactList(addressbook).size());
     addressbook.addContact(contact5);
     assertEquals(5, getContactList(addressbook).size());
   }
-
+  
   @Test
   public final void testAddressBook() {
     assertEquals(0, getContactList(addressbook).size());
