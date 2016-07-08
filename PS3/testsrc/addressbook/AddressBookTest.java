@@ -121,15 +121,19 @@ public class AddressBookTest {
 		assertTrue(addressBookFile.exists());
 	}
 
-	/*@Test
-	public final void testSave(expected = IOException.class) {
+	@Test(expected = IOException.class)
+	public final void testSave_IOException {
+		
 		
 	}
-
-	@Test
-	public final void testSave(expected = FileNotFoundException.class) {
-		
-	}*/
+	
+	@Test(expected = FileNotFoundException.class) 
+	public final void testSave_fileNotFoundException() throws FileNotFoundException, IOException{
+		Contact contact = new Contact.Builder().withEmail("kw@yahoo.com").withPhoneNumber("55534-4").
+				withName("Kanye West").withNote("rapper").build();
+		addressbook.addContact(contact);
+		addressbook.save("nonExistentAddressBook");
+	}
 
 	@Test
 	public final void testToString() {
