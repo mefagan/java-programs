@@ -102,6 +102,13 @@ public class ContactTest {
 		assertEquals(expected, contact.toString());
 	}
 	
+	@Test
+	public final void testMatch(){
+		contact = new Contact.Builder().withEmail("marcel@gmail.com").build();
+		assertTrue(contact.match(AddressBook.ContactAttribute.EMAIL, ".edu"));
+		assertFalse(contact.match(AddressBook.ContactAttribute.EMAIL, "nyu"));
+	}
+	
 	public class MatchableStringTest{
 		
 	}
