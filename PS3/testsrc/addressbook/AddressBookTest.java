@@ -18,6 +18,7 @@ import org.junit.Test;
 public class AddressBookTest {
 	
 	private AddressBook addressbook;
+	
 
 	@Before
 	public void setUp(){
@@ -84,8 +85,14 @@ public class AddressBookTest {
 	}
 
 	@Test
-	public final void testAddressBookString() {
-		fail("Not yet implemented");
+	public final void testAddressBookString() throws FileNotFoundException, IOException {
+		new File("addressBookFile");
+		Contact contact = new Contact.Builder().withEmail("kw@yahoo.com").withPhoneNumber("55534-4").
+				withName("Kanye West").withNote("rapper").build();
+		addressbook.addContact(contact);
+		addressbook.save("addressBookFile");
+		AddressBook addressbookFromFile = new AddressBook("addressBookFile");
+		assertEquals(1, getContactList(addressbookFromFile).size());
 	}
 
 	@Test
@@ -122,7 +129,7 @@ public class AddressBookTest {
 	}
 
 	@Test(expected = IOException.class)
-	public final void testSave_IOException {
+	public final void testSave_IOException( ){
 		
 		
 	}
