@@ -2,6 +2,7 @@ package addressbook;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -112,12 +113,12 @@ public class AddressBookTest {
 
 	@Test
 	public final void testSave() throws FileNotFoundException, IOException {
+		File addressBookFile = new File("addressBookFile");
 		Contact contact = new Contact.Builder().withEmail("kw@yahoo.com").withPhoneNumber("55534-4").
 				withName("Kanye West").withNote("rapper").build();
 		addressbook.addContact(contact);
 		addressbook.save("addressBookFile");
-		AddressBook addressbook2 = new AddressBook();
-		AddressBook("ddressBookFile");
+		assertTrue(addressBookFile.exists());
 	}
 
 	/*@Test
