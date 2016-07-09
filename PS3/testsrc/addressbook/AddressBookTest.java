@@ -16,7 +16,7 @@ import addressbook.AddressBook;
 
 public class AddressBookTest {
 
-private AddressBook addressbook;
+  private AddressBook addressbook;
 
   @Before
   public void setUp(){
@@ -92,12 +92,13 @@ private AddressBook addressbook;
 
   @Test
   public final void testRemoveContact() {
-    Contact contact = new Contact.Builder().withName("MaryEileen Fagan").build();
+    Contact contact = new Contact.Builder().withName("Ziggy Stardust").build();
     addressbook.addContact(contact);
+    assertEquals(1, getContactList(addressbook).size());
     addressbook.removeContact(contact);
     assertEquals(0, getContactList(addressbook).size());
   }
-
+ 
   @Test
   public final void testSearch_Entry() {
     Contact contact = new Contact.Builder().withName("MaryEileen Fagan").withAddress("Rittenhouse Square").build();
@@ -115,12 +116,6 @@ private AddressBook addressbook;
     addressbook.save("addressBookFile");
     assertTrue(addressBookFile.exists());
   }
-
-  @Test(expected = IOException.class)
-  public final void testSave_IOException( ){
-	
-		
-	}
 	
   @Test(expected = FileNotFoundException.class) 
   public final void testSave_fileNotFoundException() throws FileNotFoundException, IOException{
