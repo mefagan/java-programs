@@ -1,6 +1,9 @@
 MaryEileen Fagan
 Code Review
 
+Thread Safety
+Not documented in javadocs thoroughly. Mentions in line 9-10 of StopWatchCreator, but I think it should be expanded for individual methods.
+
 StopWatchCreator
 line 43
 It would be helpful for the javadoc to explain what the start function does apart from throwing an illegal argument exception in the case of an already running stopwatch.
@@ -31,36 +34,18 @@ StopWatchFactory
 Lines 16-17
 I think this should be in the javadoc instead of a comment.
 
-.
-Contact:55: Integer.parseInt will throw a NumberFormatException for most valid phone numbers (overflow). Should confirm that the string contains only digits in another way.
-Strings should be compared with .equals, not ==.
-Missing toString for AddressBook.
-Contact#equals incorrectly implemented. If the argument is not of type Contact, the first line will throw a ClassCastException. The type should be checked before casting. 
-Contact:166: Use instanceof instead of getClass().
-Inconsistent naming in Builder methods.
-AddressBook:14: should use interfaces for declaration, not concrete classes.
-Return types should also be interfaces instead of implementations.
-Shouldn’t catch an exception just to throw it again.
-If you do throw an exception, it should have a descriptive error message.
-AddressBook:104, 124: throwing the exception would be more appropriate here than returning false.
-AddressBook:124: Should catch a more specific Exception.
-AddressBook#match logic would make more sense in Contact.
-AddressBook#search can return false positives since all fields are concatenated and then that string is used for the search.
-AddressBook:116: Do not call toString on a string.
-Package name could be better.
-Javadoc should begin with 2 “*”s, not 3. 
-Missing @throws in many methods.
-Don’t use “this” to access members of the class you are in when there isn’t another variable with the same name in a closer scope. (e.g. Contact:41)
-Style issues
-Tabs used.
-Lines over 100 characters.
-A single whitespace should be used before open braces, and to separate “if,” “for,” “while,” and “catch” when an open parenthesis follows them on the same line.(4.6.2)
-Braces should always be used, even for empty or single-line statements. (4.1.1)
-There should not be a space between a method name and its opening parenthesis (e.g. Contact:52).
-There should be no line break after the closing brace of an if-statement if it is followed by an else, or after a try-statement if it is followed by a catch.
-There should be a space after the closing parenthesis of a cast (e.g. Contact:161).
-Line continuations should be 4-space indents.
-Unnecessary comments left in code.
-Should not use wildcard imports.
-Incorrect import ordering.
-Each group of imports should be separated by a blank line.
+Line 19
+I’ve never seen CopyOnWriteWriteArrayList before, but from brief reading online, it seems like it’s not efficient and not ideal for modifying an array. Documentation mentions that it’s good if iterating, but won’t update changes if you’re modifying the list, which seems less effective since we are modifying the list of stopwatches and rarely iterating through it.
+
+Line 24
+Javadocs param should give type
+
+Line 35-36
+This seems more appropriate for javadoc
+
+Extra ending space
+
+All error messages are missing descriptive error descriptions. Add these.
+For example “Error: Stopwatch cannot record lap because it is not running”.
+StopWatchCreator-Lines 45, 66, 81
+StopWatchFactory- Lines 30, 34
