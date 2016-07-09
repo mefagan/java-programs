@@ -88,6 +88,8 @@ public class AddressBookTest {
     Contact contact = new Contact.Builder().withName("MaryEileen Fagan").build();
     addressbook.addContact(contact);
     assertEquals(1, getContactList(addressbook).size());
+    ArrayList<Contact> entries = addressbook.search(AddressBook.ContactAttribute.NAME, "Fagan");
+    assertTrue(entries.get(0).getName().equals("MaryEileen Fagan"));
   }
 
   @Test
@@ -95,8 +97,12 @@ public class AddressBookTest {
     Contact contact = new Contact.Builder().withName("Ziggy Stardust").build();
     addressbook.addContact(contact);
     assertEquals(1, getContactList(addressbook).size());
+    ArrayList<Contact> entries = addressbook.search(AddressBook.ContactAttribute.NAME, "");
+    assertTrue(entries.get(0).getName().equals("Ziggy Stardust"));
     addressbook.removeContact(contact);
     assertEquals(0, getContactList(addressbook).size());
+    ArrayList<Contact> entries2 = addressbook.search(AddressBook.ContactAttribute.NAME, "");
+    assertTrue(entries2.isEmpty());
   }
  
   @Test
@@ -104,7 +110,7 @@ public class AddressBookTest {
     Contact contact = new Contact.Builder().withName("MaryEileen Fagan").withAddress("Rittenhouse Square").build();
     addressbook.addContact(contact);
     addressbook.search(AddressBook.ContactAttribute.EMAIL, "nyu.edu");
-    assertEquals(1, addressbook.search(AddressBook.ContactAttribute.NAME, "MaryEileen").size());
+    assertEquals(1, addressbook.search(AddressBook.ContactAttribute.NAME, "MaryEileen").size());   
   }
 
   @Test
@@ -113,6 +119,13 @@ public class AddressBookTest {
     Contact contact = new Contact.Builder().withEmail("kw@yahoo.com").withPhoneNumber("55534-4").
         withName("Kanye West").withNote("rapper").build();
     addressbook.addContact(contact);
+    addressbook.save("addressBookFile");
+    assertTrue(addressBookFile.exists());
+  }
+  
+  @Test
+  public final void testSave_emptyAddressBook() throws FileNotFoundException, IOException {
+    File addressBookFile = new File("addressBookFile");
     addressbook.save("addressBookFile");
     assertTrue(addressBookFile.exists());
   }
