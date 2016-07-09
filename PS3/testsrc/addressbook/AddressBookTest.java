@@ -16,7 +16,7 @@ import addressbook.AddressBook;
 
 public class AddressBookTest {
 
-  private AddressBook addressbook;
+private AddressBook addressbook;
 
   @Before
   public void setUp(){
